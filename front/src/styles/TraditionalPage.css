@@ -19,17 +19,13 @@
   position: relative;
 }
 
-.container .btn:hover {
-  opacity: 1;
-}
-
 .container:hover .btn {
   opacity: 1;
+  cursor: pointer;
 }
 
-.img:hover {
+.container:hover .img {
   opacity: 0.5;
-  cursor: pointer;
 }
 
 .btn {
