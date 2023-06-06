@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import imageService from "../services/images";
 
 const UploadPage = () => {
   const [imageUpload, setImageUpload] = useState<any>(null);
@@ -9,7 +10,6 @@ const UploadPage = () => {
   const [year, setYear] = useState<any>("");
   const [comments, setComments] = useState<any>("");
   const [category, setCategory] = useState<any>("");
-  const [imageUrl, setImageUrl] = useState<any>("");
 
   const uploadFile = () => {
     if (imageUpload === null) {
@@ -20,23 +20,36 @@ const UploadPage = () => {
       // get download link
       getDownloadURL(imageRef).then((url) => {
         console.log("url", url);
-        setImageUrl(url);
+        alert("Image Uploaded to firebase");
+        uploadData(url);
       });
-      console.log("Uploaded a blob or file!", snapshot);
-      alert("Image Uploaded");
     });
   };
 
-  console.log(
-    "name",
-    name,
-    "year",
-    year,
-    "comments",
-    comments,
-    "category",
-    category
-  );
+  const uploadData = (url: String) => {
+    console.log(
+      "name",
+      name,
+      "year",
+      year,
+      "comments",
+      comments,
+      "category",
+      category,
+      "imageUrl",
+      url
+    );
+
+    var ImageObject = {
+      name,
+      year,
+      comments,
+      url,
+      category,
+    };
+
+    imageService.uploadImage(ImageObject).then((data: any) => {});
+  };
 
   return (
     <div>

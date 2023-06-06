@@ -41,7 +41,7 @@ imageRouter.post("/", async (req, res) => {
     category: body.category,
   });
   const savedImage = await image.save();
-  res.status(201).json(savedImage);
+  res.status(201).json(savedImage.toJson);
 });
 
 module.exports = imageRouter;
