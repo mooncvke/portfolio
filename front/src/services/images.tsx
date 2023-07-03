@@ -1,6 +1,11 @@
 import axios from "axios";
 const baseUrl = "http://localhost:3001/api";
 
+const getAll = () => {
+  const request = axios.get(baseUrl);
+  return request.then((response) => response.data);
+};
+
 const getTraditional = () => {
   const request = axios.get(`${baseUrl}/traditional`);
   console.log("url", `${baseUrl}/traditional`);
@@ -32,4 +37,20 @@ const uploadImage = async (imageObject: Object) => {
   }
 };
 
-export default { getTraditional, getDigital, getPhotography, uploadImage };
+const deleteImage = async (id: string) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/images/${id}`);
+    return response.data;
+  } catch (error) {
+    return console.log("error", error);
+  }
+};
+
+export default {
+  getAll,
+  getTraditional,
+  getDigital,
+  getPhotography,
+  uploadImage,
+  deleteImage,
+};

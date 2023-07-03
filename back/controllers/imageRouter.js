@@ -1,10 +1,23 @@
 const imageRouter = require("express").Router();
 const Image = require("../models/image.js");
+const logger = require("../utils/logger");
 
 imageRouter.get("/", async (req, res) => {
   // get all objects from Image model
   const images = await Image.find({});
   res.json(images);
+});
+
+imageRouter.get("/images/:id", async (req, response) => {
+  logger.info(req);
+  // get object from Image model where id matches id in request
+  const image = await Image.findById(req.params.id);
+
+  if (image === null) {
+    response.json("no content");
+  } else {
+    response.json(image.toJSON);
+  }
 });
 
 imageRouter.get("/traditional", async (req, res) => {
@@ -42,6 +55,13 @@ imageRouter.post("/", async (req, res) => {
   });
   const savedImage = await image.save();
   res.status(201).json(savedImage.toJson);
+});
+
+imageRouter.delete("/images/:id", async (req, res) => {
+  // delete object from Image model where id matches id in request
+  console.log(req.body);
+  const image = await Image.findByIdAndRemove(req.params.id);
+  res.status(204).end();
 });
 
 module.exports = imageRouter;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import imageService from "../services/images";
-import "../styles/DigitalPage.css";
+import "../styles/ImageContainer.css";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 type ImageType = {
   category: string;
@@ -29,7 +30,7 @@ const DigitalPage = () => {
     <div className="img-container">
       {images.map((image) => (
         <div className="container" key={image.id}>
-          <img className="img" src={image.url} alt="digital art" />
+          <LazyLoadImage className="img" src={image.url} alt="digital art" />
           <button className="btn"> OPEN </button>
         </div>
       ))}
