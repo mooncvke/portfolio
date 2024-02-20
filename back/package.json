@@ -21,7 +21,8 @@
     "firebase": "^9.22.1",
     "mongodb": "^5.9.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
